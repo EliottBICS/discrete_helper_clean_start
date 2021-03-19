@@ -1,3 +1,4 @@
+import 'package:discrete_helper_clean_start/views/signup.dart';
 import 'package:discrete_helper_clean_start/widgets/widgets.dart';
 import 'package:flutter/material.dart';
 
@@ -49,15 +50,20 @@ class _SignInState extends State<SignIn> {
                 },
               ),
               SizedBox(height: 20,),
-              Container(
-                padding: EdgeInsets.symmetric(vertical: 17) ,
-                width: MediaQuery.of(context).size.width - 20,
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(30),
-                  color: Colors.blue,
+              GestureDetector(
+                onTap: (){
+                  print("You clicked on sign in");
+                },
+                child: Container(
+                  padding: EdgeInsets.symmetric(vertical: 17) ,
+                  width: MediaQuery.of(context).size.width - 20,
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(30),
+                    color: Colors.blue,
+                  ),
+                  alignment: Alignment.center,
+                  child: Text("Sign In", style: TextStyle(color: Colors.white)),
                 ),
-                alignment: Alignment.center,
-                child: Text("Sign In", style: TextStyle(color: Colors.white)),
               ),
               SizedBox(height: 20,),
 
@@ -68,10 +74,15 @@ class _SignInState extends State<SignIn> {
                     "Don't have an account?",
                     style: TextStyle(fontSize: 15),
                   ),
-                  Text(
-                    "Sign up",
-                      style: TextStyle(fontSize: 15,
-                        decoration: TextDecoration.underline,),
+                  GestureDetector(
+                    onTap: (){
+                      Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => SignUp()));
+                    },
+                    child: Text(
+                      "Sign up",
+                        style: TextStyle(fontSize: 15,
+                          decoration: TextDecoration.underline,),
+                    ),
                   ),
                 ],
               ),
