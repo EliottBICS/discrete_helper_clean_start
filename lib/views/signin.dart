@@ -81,6 +81,7 @@ class _SignInState extends State<SignIn> {
                     child: Text(
                       "Sign up",
                         style: TextStyle(fontSize: 15,
+                          color: Colors.blue,
                           decoration: TextDecoration.underline,),
                     ),
                   ),

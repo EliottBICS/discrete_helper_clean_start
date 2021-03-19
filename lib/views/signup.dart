@@ -1,7 +1,6 @@
+import 'package:discrete_helper_clean_start/views/signin.dart';
 import 'package:flutter/material.dart';
 import 'package:discrete_helper_clean_start/widgets/widgets.dart';
-
-
 
 class SignUp extends StatefulWidget {
   @override
@@ -21,7 +20,7 @@ class _SignUpState extends State<SignUp> {
         elevation: 1,
       ),
       body: Form(
-        key : _formKey,
+        key: _formKey,
         child: Container(
           padding: EdgeInsets.symmetric(horizontal: 10),
           child: Column(
@@ -59,24 +58,27 @@ class _SignUpState extends State<SignUp> {
                   password = val;
                 },
               ),
-              SizedBox(height: 20,),
+              SizedBox(
+                height: 20,
+              ),
               GestureDetector(
-                onTap: (){
-
+                onTap: () {
+                  print("You clicked on Sign Up");
                 },
                 child: Container(
-                  padding: EdgeInsets.symmetric(vertical: 17) ,
+                  padding: EdgeInsets.symmetric(vertical: 17),
                   width: MediaQuery.of(context).size.width - 20,
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(30),
                     color: Colors.blue,
                   ),
                   alignment: Alignment.center,
-                  child: Text("Sign In", style: TextStyle(color: Colors.white)),
+                  child: Text("Sign Up", style: TextStyle(color: Colors.white)),
                 ),
               ),
-              SizedBox(height: 20,),
-
+              SizedBox(
+                height: 20,
+              ),
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
@@ -84,14 +86,25 @@ class _SignUpState extends State<SignUp> {
                     "Already have an account?",
                     style: TextStyle(fontSize: 15),
                   ),
-                  Text(
-                    "Sign in",
-                    style: TextStyle(fontSize: 15,
-                      decoration: TextDecoration.underline,),
+                  GestureDetector(
+                    onTap: () {
+                      Navigator.pushReplacement(context,
+                          MaterialPageRoute(builder: (context) => SignIn()));
+                    },
+                    child: Text(
+                      "Sign in",
+                      style: TextStyle(
+                        fontSize: 15,
+                        color: Colors.blue,
+                        decoration: TextDecoration.underline,
+                      ),
+                    ),
                   ),
                 ],
               ),
-              SizedBox(height: 20,)
+              SizedBox(
+                height: 20,
+              )
             ],
           ),
         ),
