@@ -5,7 +5,7 @@ Widget discreteHelperAppBar(BuildContext context){
     text: TextSpan(
       style: TextStyle(fontSize: 20),
       children: <TextSpan>[
-        TextSpan(text: 'discrete', style: TextStyle(fontWeight: FontWeight.w300) ),
+        TextSpan(text: 'Discrete', style: TextStyle(fontWeight: FontWeight.w300) ),
         TextSpan(text: 'Helper', style: TextStyle(fontWeight: FontWeight.bold)),
       ],
     ),

@@ -12,7 +12,7 @@ class MyApp extends StatelessWidget {
       title: "Discrete maths application",
       home: SignIn(),
       theme: ThemeData(
-        primarySwatch: Colors.deepPurple,
+        primarySwatch: Colors.teal,
       ),
     );
   }
