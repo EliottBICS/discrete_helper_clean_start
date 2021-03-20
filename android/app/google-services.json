@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "1034982025022",
+    "project_id": "discretehelper-724ce",
+    "storage_bucket": "discretehelper-724ce.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1034982025022:android:ecb9a5f50ccf2397a3ae6f",
+        "android_client_info": {
+          "package_name": "com.example.discrete_helper_clean_start"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1034982025022-ngmedocp5jb4ofbgl08uimvie3ffmroc.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAvzmb53XvGfQCQ3hHqaerP_UlhV1ASpoc"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1034982025022-ngmedocp5jb4ofbgl08uimvie3ffmroc.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
