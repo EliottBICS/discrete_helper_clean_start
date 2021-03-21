@@ -11,6 +11,13 @@ class _SignInState extends State<SignIn> {
   final _formKey = GlobalKey<FormState>();
   String email, password;
 
+
+  signIn(){
+    if(_formKey.currentState.validate()){
+
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -52,6 +59,7 @@ class _SignInState extends State<SignIn> {
               SizedBox(height: 20,),
               GestureDetector(
                 onTap: (){
+                  signIn();
                   print("You clicked on sign in");
                 },
                 child: Container(
