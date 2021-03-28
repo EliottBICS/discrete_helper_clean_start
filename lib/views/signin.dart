@@ -1,20 +1,40 @@
+import 'package:discrete_helper_clean_start/services/auth.dart';
+import 'package:discrete_helper_clean_start/views/home.dart';
 import 'package:discrete_helper_clean_start/views/signup.dart';
 import 'package:discrete_helper_clean_start/widgets/widgets.dart';
 import 'package:flutter/material.dart';
+import 'package:discrete_helper_clean_start/widgets/BICSColors.dart';
+import 'package:discrete_helper_clean_start/models/student.dart';
 
 class SignIn extends StatefulWidget {
   @override
   _SignInState createState() => _SignInState();
+
 }
 
 class _SignInState extends State<SignIn> {
   final _formKey = GlobalKey<FormState>();
   String email, password;
+  AuthService authService = new AuthService();
 
 
-  signIn(){
+  bool _isLoading = false;
+
+
+  signIn() async {
     if(_formKey.currentState.validate()){
 
+      setState(() {
+        _isLoading = true;
+      });
+      await authService.signInEmailPassword(email, password).then((val){
+        if(val != null){
+          setState(() {
+            _isLoading = false;
+          });
+          Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => Home() ));
+        }
+      });
     }
   }
 
@@ -26,7 +46,9 @@ class _SignInState extends State<SignIn> {
         brightness: Brightness.dark,
         elevation: 1,
       ),
-      body: Form(
+      body: _isLoading ? Container(
+        child : Center(child: CircularProgressIndicator()),
+      ) : Form(
         key : _formKey,
         child: Container(
           padding: EdgeInsets.symmetric(horizontal: 10),
@@ -35,7 +57,6 @@ class _SignInState extends State<SignIn> {
               Spacer(),
               TextFormField(
                 validator: (val) {
-                  print("empty mail");
                   return val.isEmpty ? "The mail field is empty" : null;
                 },
                 decoration: InputDecoration(hintText: "email"),
@@ -44,6 +65,7 @@ class _SignInState extends State<SignIn> {
                 },
               ),
               TextFormField(
+                obscureText: true,
                 validator: (val) {
                   if (val.isEmpty) {
                     return "The password field is empty";

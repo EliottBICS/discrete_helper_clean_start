@@ -1,3 +1,5 @@
+import 'package:discrete_helper_clean_start/services/auth.dart';
+import 'package:discrete_helper_clean_start/views/home.dart';
 import 'package:discrete_helper_clean_start/views/signin.dart';
 import 'package:flutter/material.dart';
 import 'package:discrete_helper_clean_start/widgets/widgets.dart';
@@ -10,6 +12,28 @@ class SignUp extends StatefulWidget {
 class _SignUpState extends State<SignUp> {
   final _formKey = GlobalKey<FormState>();
   String name, email, password;
+  AuthService authService = new AuthService();
+  bool _isLoading = false;
+  signUp()  {
+    if(_formKey.currentState.validate()){
+
+      setState(() {
+        _isLoading = true;
+        
+      });
+
+      authService.signUpWithEmailAndPassword(email, password).then((value) {
+        if(value != null){
+          setState(() {
+            _isLoading = false;
+          });
+          Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => Home()
+          ));
+        }
+      });
+
+    }
+}
 
   @override
   Widget build(BuildContext context) {
@@ -19,7 +43,9 @@ class _SignUpState extends State<SignUp> {
         brightness: Brightness.dark,
         elevation: 1,
       ),
-      body: Form(
+      body: _isLoading ? Container(
+        child: Center(child: CircularProgressIndicator(),),
+      ) : Form(
         key: _formKey,
         child: Container(
           padding: EdgeInsets.symmetric(horizontal: 10),
@@ -37,7 +63,6 @@ class _SignUpState extends State<SignUp> {
               ),
               TextFormField(
                 validator: (val) {
-                  print("empty mail");
                   return val.isEmpty ? "The mail field is empty" : null;
                 },
                 decoration: InputDecoration(hintText: "email"),
@@ -46,13 +71,14 @@ class _SignUpState extends State<SignUp> {
                 },
               ),
               TextFormField(
-                validator: (val) {
-                  if (val.isEmpty) {
-                    return "The password field is empty";
-                  } else {
-                    return null;
-                  }
-                },
+                obscureText: true,
+                      validator: (val) {
+                        if (val.isEmpty) {
+                          return "The password field is empty";
+                        } else {
+                          return null;
+                        }
+                      },
                 decoration: InputDecoration(hintText: "password"),
                 onChanged: (val) {
                   password = val;
@@ -64,6 +90,7 @@ class _SignUpState extends State<SignUp> {
               GestureDetector(
                 onTap: () {
                   print("You clicked on Sign Up");
+                  signUp();
                 },
                 child: Container(
                   padding: EdgeInsets.symmetric(vertical: 17),
