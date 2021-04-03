@@ -84,16 +84,7 @@ class _SignInState extends State<SignIn> {
                   signIn();
                   print("You clicked on sign in");
                 },
-                child: Container(
-                  padding: EdgeInsets.symmetric(vertical: 17) ,
-                  width: MediaQuery.of(context).size.width - 20,
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(30),
-                    color: Colors.blue,
-                  ),
-                  alignment: Alignment.center,
-                  child: Text("Sign In", style: TextStyle(color: Colors.white)),
-                ),
+                child: bicsBlueButton(context, "Sign In")
               ),
               SizedBox(height: 20,),
 

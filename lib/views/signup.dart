@@ -89,19 +89,9 @@ class _SignUpState extends State<SignUp> {
               ),
               GestureDetector(
                 onTap: () {
-                  print("You clicked on Sign Up");
                   signUp();
                 },
-                child: Container(
-                  padding: EdgeInsets.symmetric(vertical: 17),
-                  width: MediaQuery.of(context).size.width - 20,
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(30),
-                    color: Colors.blue,
-                  ),
-                  alignment: Alignment.center,
-                  child: Text("Sign Up", style: TextStyle(color: Colors.white)),
-                ),
+                child: bicsBlueButton(context, "Sign up")
               ),
               SizedBox(
                 height: 20,

@@ -1,3 +1,4 @@
+import 'package:discrete_helper_clean_start/views/create_question.dart';
 import 'package:discrete_helper_clean_start/widgets/BICSColors.dart';
 import 'package:discrete_helper_clean_start/widgets/widgets.dart';
 import 'package:flutter/material.dart';
@@ -24,32 +25,20 @@ class _HomeState extends State<Home> {
     return Scaffold(
       appBar: AppBar(
         title: discreteHelperAppBar(context),
-        brightness: Brightness.dark
+        brightness: Brightness.dark,
       ),
-      floatingActionButton: InkWell(
-        splashColor: BICSBlue(),
-        onLongPress: (){
-          setState(() {
-            score = 0;
-          });
-        },
-        child: FloatingActionButton(
-          onPressed: (){
-            // FirebaseFirestore.instance.collection('data').add({'not text': 'data added through app'});
-            setState(() {
-              score = score +1;
-            });
-          },
+      body: Container(
+        child: Column(
+          children: [],
         ),
       ),
-      body: Column(
-        children: [
-          Row(
-            children: [
-              Text('$score')
-            ],
-          )
-        ],
+      floatingActionButton: FloatingActionButton(
+        child: Icon(Icons.add),
+        onPressed: (){
+          //We use push to be able to go back, as opposed to pushreplacement
+          Navigator.push(context, MaterialPageRoute(builder: (context) => CreateQuestion()
+          ));
+        },
       ),
     );
   }
