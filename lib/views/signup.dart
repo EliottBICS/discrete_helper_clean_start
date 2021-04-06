@@ -14,26 +14,23 @@ class _SignUpState extends State<SignUp> {
   String name, email, password;
   AuthService authService = new AuthService();
   bool _isLoading = false;
-  signUp()  {
-    if(_formKey.currentState.validate()){
-
+  signUp() {
+    if (_formKey.currentState.validate()) {
       setState(() {
         _isLoading = true;
-        
       });
 
       authService.signUpWithEmailAndPassword(email, password).then((value) {
-        if(value != null){
+        if (value != null) {
           setState(() {
             _isLoading = false;
           });
-          Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => Home()
-          ));
+          Navigator.pushReplacement(
+              context, MaterialPageRoute(builder: (context) => Home()));
         }
       });
-
     }
-}
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -43,35 +40,39 @@ class _SignUpState extends State<SignUp> {
         brightness: Brightness.dark,
         elevation: 1,
       ),
-      body: _isLoading ? Container(
-        child: Center(child: CircularProgressIndicator(),),
-      ) : Form(
-        key: _formKey,
-        child: Container(
-          padding: EdgeInsets.symmetric(horizontal: 10),
-          child: Column(
-            children: [
-              Spacer(),
-              TextFormField(
-                validator: (val) {
-                  return val.isEmpty ? "The name field is empty" : null;
-                },
-                decoration: InputDecoration(hintText: "name"),
-                onChanged: (val) {
-                  name = val;
-                },
+      body: _isLoading
+          ? Container(
+              child: Center(
+                child: CircularProgressIndicator(),
               ),
-              TextFormField(
-                validator: (val) {
-                  return val.isEmpty ? "The mail field is empty" : null;
-                },
-                decoration: InputDecoration(hintText: "email"),
-                onChanged: (val) {
-                  email = val;
-                },
-              ),
-              TextFormField(
-                obscureText: true,
+            )
+          : Form(
+              key: _formKey,
+              child: Container(
+                padding: EdgeInsets.symmetric(horizontal: 10),
+                child: Column(
+                  children: [
+                    Spacer(),
+                    TextFormField(
+                      validator: (val) {
+                        return val.isEmpty ? "The name field is empty" : null;
+                      },
+                      decoration: InputDecoration(hintText: "name"),
+                      onChanged: (val) {
+                        name = val;
+                      },
+                    ),
+                    TextFormField(
+                      validator: (val) {
+                        return val.isEmpty ? "The mail field is empty" : null;
+                      },
+                      decoration: InputDecoration(hintText: "email"),
+                      onChanged: (val) {
+                        email = val;
+                      },
+                    ),
+                    TextFormField(
+                      obscureText: true,
                       validator: (val) {
                         if (val.isEmpty) {
                           return "The password field is empty";
@@ -79,53 +80,54 @@ class _SignUpState extends State<SignUp> {
                           return null;
                         }
                       },
-                decoration: InputDecoration(hintText: "password"),
-                onChanged: (val) {
-                  password = val;
-                },
-              ),
-              SizedBox(
-                height: 20,
-              ),
-              GestureDetector(
-                onTap: () {
-                  signUp();
-                },
-                child: bicsBlueButton(context, "Sign up")
-              ),
-              SizedBox(
-                height: 20,
-              ),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Text(
-                    "Already have an account?",
-                    style: TextStyle(fontSize: 15),
-                  ),
-                  GestureDetector(
-                    onTap: () {
-                      Navigator.pushReplacement(context,
-                          MaterialPageRoute(builder: (context) => SignIn()));
-                    },
-                    child: Text(
-                      "Sign in",
-                      style: TextStyle(
-                        fontSize: 15,
-                        color: Colors.blue,
-                        decoration: TextDecoration.underline,
-                      ),
+                      decoration: InputDecoration(hintText: "password"),
+                      onChanged: (val) {
+                        password = val;
+                      },
                     ),
-                  ),
-                ],
+                    SizedBox(
+                      height: 20,
+                    ),
+                    GestureDetector(
+                        onTap: () {
+                          signUp();
+                        },
+                        child: bicsBlueButton(context, "Sign up")),
+                    SizedBox(
+                      height: 20,
+                    ),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Text(
+                          "Already have an account?",
+                          style: TextStyle(fontSize: 15),
+                        ),
+                        GestureDetector(
+                          onTap: () {
+                            Navigator.pushReplacement(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) => SignIn()));
+                          },
+                          child: Text(
+                            "Sign in",
+                            style: TextStyle(
+                              fontSize: 15,
+                              color: Colors.blue,
+                              decoration: TextDecoration.underline,
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
+                    SizedBox(
+                      height: 20,
+                    )
+                  ],
+                ),
               ),
-              SizedBox(
-                height: 20,
-              )
-            ],
-          ),
-        ),
-      ),
+            ),
     );
   }
 }

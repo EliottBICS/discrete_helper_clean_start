@@ -8,7 +8,7 @@ import 'package:firebase_core/firebase_core.dart';
 //The homescreen. Users that are properly identified end up here
 //You can access questionnaires from here
 
-void main() async{
+void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
   FirebaseFirestore db = FirebaseFirestore.instance;
@@ -21,7 +21,6 @@ class Home extends StatefulWidget {
 }
 
 class _HomeState extends State<Home> {
-  
   int score = 0;
   @override
   Widget build(BuildContext context) {
@@ -37,10 +36,12 @@ class _HomeState extends State<Home> {
       ),
       floatingActionButton: FloatingActionButton(
         child: Icon(Icons.add),
-        onPressed: (){
+        onPressed: () {
           //We use push to be able to go back, as opposed to pushreplacement
-          Navigator.push(context, MaterialPageRoute(builder: (context) => CreateQuestion()
-          ));
+          Navigator.push(context,
+              MaterialPageRoute(
+                  builder: (context) => CreateQuestion()
+              ));
         },
       ),
     );

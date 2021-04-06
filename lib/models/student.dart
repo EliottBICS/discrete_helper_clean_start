@@ -1,4 +1,4 @@
-class Student{
+class Student {
   String uid;
   Student({this.uid});
 }
