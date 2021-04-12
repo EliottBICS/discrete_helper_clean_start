@@ -1,3 +1,4 @@
+import 'package:discrete_helper_clean_start/preferences/functions.dart';
 import 'package:discrete_helper_clean_start/services/auth.dart';
 import 'package:discrete_helper_clean_start/views/home.dart';
 import 'package:discrete_helper_clean_start/views/signup.dart';
@@ -28,6 +29,7 @@ class _SignInState extends State<SignIn> {
           setState(() {
             _isLoading = false;
           });
+          preferenceFunctions.rememberUser(isLoggedin: true);
           Navigator.pushReplacement(
               context, MaterialPageRoute(builder: (context) => Home()));
         }

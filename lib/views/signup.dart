@@ -3,6 +3,7 @@ import 'package:discrete_helper_clean_start/views/home.dart';
 import 'package:discrete_helper_clean_start/views/signin.dart';
 import 'package:flutter/material.dart';
 import 'package:discrete_helper_clean_start/widgets/widgets.dart';
+import 'package:discrete_helper_clean_start/preferences/functions.dart';
 
 class SignUp extends StatefulWidget {
   @override
@@ -14,7 +15,8 @@ class _SignUpState extends State<SignUp> {
   String name, email, password;
   AuthService authService = new AuthService();
   bool _isLoading = false;
-  signUp() {
+
+  signUp() async {
     if (_formKey.currentState.validate()) {
       setState(() {
         _isLoading = true;
@@ -25,6 +27,7 @@ class _SignUpState extends State<SignUp> {
           setState(() {
             _isLoading = false;
           });
+          preferenceFunctions.rememberUser(isLoggedin: true);
           Navigator.pushReplacement(
               context, MaterialPageRoute(builder: (context) => Home()));
         }
