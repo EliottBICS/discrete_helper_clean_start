@@ -19,7 +19,7 @@ class _AddQuestionState extends State<AddQuestion> {
   final _formkey = GlobalKey<FormState>();
   //For now, answer1 is the correct option
   String question, answer1, answer2, answer3, answer4;
-  bool _isloading = false;
+  bool _isLoading = false;
 
   DatabaseService databaseService = new DatabaseService();
 
@@ -28,7 +28,7 @@ class _AddQuestionState extends State<AddQuestion> {
     if(_formkey.currentState.validate()){
 
       setState(() {
-        _isloading = true;
+        _isLoading = true;
       });
 
       //the keys are always strings (obvious) and the keys in this case are strings
@@ -44,7 +44,7 @@ class _AddQuestionState extends State<AddQuestion> {
       await databaseService.addQuestionData(questionData, widget.questionnaireId)
       .then((value){
         setState(() {
-          _isloading = false;
+          _isLoading = false;
         });
       });
 
