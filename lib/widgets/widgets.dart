@@ -20,7 +20,21 @@ Widget bicsBlueButton(BuildContext context, String label) {
     decoration: BoxDecoration(
         color: BICSGreen(), borderRadius: BorderRadius.circular(30)),
     alignment: Alignment.center,
-    width: MediaQuery.of(context).size.width - 20,
+    width: MediaQuery
+        .of(context)
+        .size
+        .width - 20,
     child: Text(label, style: TextStyle(color: Colors.white)),
   );
+}
+
+  Widget bicsRedButton(BuildContext context, String label) {
+    return Container(
+      padding: EdgeInsets.symmetric(vertical: 18),
+      decoration: BoxDecoration(
+          color: BICSRed(), borderRadius: BorderRadius.circular(30)),
+      alignment: Alignment.center,
+      width: MediaQuery.of(context).size.width - 20,
+      child: Text(label, style: TextStyle(color: Colors.white)),
+    );
 }

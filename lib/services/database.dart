@@ -1,7 +1,9 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 
 class DatabaseService {
-  //function used to pass some data to the firestore database
+  //Here are the functions used to pass some data to the firestore database
+
+  //function used to create a questionnaire
 
   Future<void> addQuestionnaireData(
       // In firestore, the couples key : value are called maps
@@ -16,6 +18,22 @@ class DatabaseService {
         .set(questionnaireData)
         .catchError((e) {
       print(e.toString());
+    });
+  }
+
+  //function used to add a question to the database
+
+  Future<void> addQuestionData(Map questionData, String questionnaireId) async {
+    //In the Questionnaire collection, add the data in the document that has
+    //the ID of the questionnaire we are editing
+    await FirebaseFirestore.instance
+        .collection("Questionnaire")
+        .doc(questionnaireId)
+        .collection("QnA") //QuestionsAndAnswers
+        .add(questionData)
+        .catchError((e) {
+      //if an error is encountered, catch it
+      print(e);
     });
   }
 }
