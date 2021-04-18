@@ -37,4 +37,5 @@ Widget bicsBlueButton(BuildContext context, String label) {
       width: MediaQuery.of(context).size.width - 20,
       child: Text(label, style: TextStyle(color: Colors.white)),
     );
+
 }
