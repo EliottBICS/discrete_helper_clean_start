@@ -10,6 +10,12 @@ class preferenceFunctions{
     prefs.setBool(UserLoggedInID, isLoggedin);
   }
 
+  //Function used to reset shared preferences (and effectively log out a user)
+  static forgetUser() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    await prefs.clear();
+  }
+
   //Function used to know if a user is logged in or not
   static Future<bool> getUser() async{
     SharedPreferences prefs = await SharedPreferences.getInstance();

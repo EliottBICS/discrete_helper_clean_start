@@ -1,3 +1,4 @@
+import 'package:discrete_helper_clean_start/preferences/functions.dart';
 import 'package:discrete_helper_clean_start/views/create_question.dart';
 import 'package:discrete_helper_clean_start/views/signin.dart';
 import 'package:discrete_helper_clean_start/widgets/BICSColors.dart';
@@ -41,7 +42,8 @@ class _HomeState extends State<Home> {
               Navigator.pushReplacement(context,
               MaterialPageRoute(builder: (context) => SignIn()));
               print("I still need to implement this functionality, right now it only brings the user back to the login screen \n I would like it to also set its _isLoggedIn to false");
-            },
+              preferenceFunctions.forgetUser();
+              },
               child: Center(child: bicsRedButton(context, "sign out"))),
           SizedBox(height: 10)],
         ),
