@@ -25,7 +25,8 @@ class _MyAppState extends State<MyApp> {
     super.initState();
   }
 
-  //If the user is already logged in, it will return true
+  //If the user is already logged in, it will set the value of _isLogged in to
+  //"true"
   checkUserLoggedIn() async {
     preferenceFunctions.getUser().then((value){
       setState(() {

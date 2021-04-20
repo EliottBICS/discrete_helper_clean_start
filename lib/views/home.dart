@@ -35,6 +35,8 @@ class _HomeState extends State<Home> {
       body: Container(
         child: Column(
           children: [
+
+            
             SizedBox(height: 10,),
             // Spacer(),
           GestureDetector(
