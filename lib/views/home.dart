@@ -33,6 +33,7 @@ class _HomeState extends State<Home> {
     //A list of available questionnaires in the form of a column
 
     return Container(
+      margin: EdgeInsets.symmetric(vertical: 0.0,horizontal: 10.0),
       child: Column(
         children: [
           StreamBuilder(
@@ -127,10 +128,13 @@ class Questionnaire extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
+      //padding: EdgeInsets.symmetric(vertical: 10),
       height: 150,
       child: Stack(
         children: [
-          Image.network(imgUrl),
+          Image.network(imgUrl, width: MediaQuery.of(context).size.width - 20, fit: BoxFit.fitWidth,),
+          //the width is now dependant on the width of the screen used
+          //the image must ensure that its whole width is conserved, regardless of its heigth
           Container(
             child: Column(
               children: [Text(title), Text(description)],
