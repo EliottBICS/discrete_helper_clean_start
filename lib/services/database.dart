@@ -36,4 +36,10 @@ class DatabaseService {
       print(e);
     });
   }
+
+  fetchQuestionnairedata() async {
+    //this function querries the content of the Questionnaire collection
+    //A snapshot is a state of the collection at some point in time
+    return await FirebaseFirestore.instance.collection("Questionnaire").snapshots();
+  }
 }

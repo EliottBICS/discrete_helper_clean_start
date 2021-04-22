@@ -1,6 +1,8 @@
 import 'package:discrete_helper_clean_start/widgets/BICSColors.dart';
 import 'package:flutter/material.dart';
 
+//dart file for widgets I could use in multiple places
+
 Widget discreteHelperAppBar(BuildContext context) {
   return RichText(
     text: TextSpan(
@@ -39,3 +41,5 @@ Widget bicsBlueButton(BuildContext context, String label) {
     );
 
 }
+
+
