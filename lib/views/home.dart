@@ -73,7 +73,7 @@ class _HomeState extends State<Home> {
     //initial state of the app
     //we want to fetch the questionnaires on the database as soon as this screen
     //is reached
-    databaseService.fetchQuestionnairedata().then((val) {
+    databaseService.fetchQuestionnaires().then((val) {
       setState(() {
         questionnaireStream = val;
       });

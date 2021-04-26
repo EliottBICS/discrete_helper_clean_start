@@ -37,9 +37,15 @@ class DatabaseService {
     });
   }
 
-  fetchQuestionnairedata() async {
+  fetchQuestionnaires() async {
     //this function querries the content of the Questionnaire collection
     //A snapshot is a state of the collection at some point in time
     return await FirebaseFirestore.instance.collection("Questionnaire").snapshots();
+  }
+
+  fetchQuestions(String questionnaireId)async{
+    //This goes into the database and fetch every documents in the "Questions and Answers" collection of a specific questionnaire
+    return await FirebaseFirestore.instance.collection("Questionnaire").doc(questionnaireId).collection("QnA").get();
+
   }
 }
