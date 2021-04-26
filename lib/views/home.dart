@@ -1,6 +1,7 @@
 import 'package:discrete_helper_clean_start/preferences/functions.dart';
 import 'package:discrete_helper_clean_start/services/database.dart';
-import 'package:discrete_helper_clean_start/views/create_question.dart';
+import 'package:discrete_helper_clean_start/views/create_questionnaire.dart';
+import 'package:discrete_helper_clean_start/views/fill_questionnaire.dart';
 import 'package:discrete_helper_clean_start/views/signin.dart';
 import 'package:discrete_helper_clean_start/widgets/BICSColors.dart';
 import 'package:discrete_helper_clean_start/widgets/widgets.dart';
@@ -57,6 +58,7 @@ class _HomeState extends State<Home> {
 
                           description: ds["questionnaireDescription"],
                           // snapshot.data.docs[index].data["questionnaireDescription"],
+                          questionnaireId: ds["questionnaireId"],
                         );
                       });
                 }
@@ -124,43 +126,53 @@ class Questionnaire extends StatelessWidget {
   final String imgUrl;
   final String title;
   final String description;
-  Questionnaire({this.imgUrl, this.description, this.title});
+  final String questionnaireId;
+
+  //constructor
+  Questionnaire({this.imgUrl, this.description, this.title, this.questionnaireId});
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      margin: EdgeInsets.symmetric(vertical: 5),
-      //padding: EdgeInsets.symmetric(vertical: 10),
-      height: 150,
-      child: Stack(
-        children: [
-          ClipRRect(
-            child: Image.network(
-              imgUrl,
-              width: MediaQuery.of(context).size.width - 20,
-              fit: BoxFit.fitWidth,
+    return GestureDetector(
+      onTap: (){
+        Navigator.push(context, MaterialPageRoute(builder: (context) => FillQuestionnaire(
+          questionnaireId
+        )));
+      },
+      child: Container(
+        margin: EdgeInsets.symmetric(vertical: 5),
+        //padding: EdgeInsets.symmetric(vertical: 10),
+        height: 150,
+        child: Stack(
+          children: [
+            ClipRRect(
+              child: Image.network(
+                imgUrl,
+                width: MediaQuery.of(context).size.width - 20,
+                fit: BoxFit.fitWidth,
+              ),
+              //the width is now dependant on the width of the screen used
+              //the image must ensure that its whole width is conserved, regardless of its heigth
+              borderRadius: BorderRadius.circular(15),
+              //I make the edges of the rectangles round, with a radius of 15
             ),
-            //the width is now dependant on the width of the screen used
-            //the image must ensure that its whole width is conserved, regardless of its heigth
-            borderRadius: BorderRadius.circular(15),
-            //I make the edges of the rectangles round, with a radius of 15
-          ),
-          Container(
-            
-            alignment: Alignment.center,
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                FittedBox(
-                    child: Text(
-                  title,
-                  style: TextStyle(color: BICSWhite(), fontWeight: FontWeight.bold, fontSize: 20),
-                )),
-                FittedBox(child: Text(description, style: TextStyle(color: BICSWhite())),)
-              ],
-            ),
-          )
-        ],
+            Container(
+              
+              alignment: Alignment.center,
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  FittedBox(
+                      child: Text(
+                    title,
+                    style: TextStyle(color: BICSWhite(), fontWeight: FontWeight.bold, fontSize: 20),
+                  )),
+                  FittedBox(child: Text(description, style: TextStyle(color: BICSWhite())),)
+                ],
+              ),
+            )
+          ],
+        ),
       ),
     );
   }
