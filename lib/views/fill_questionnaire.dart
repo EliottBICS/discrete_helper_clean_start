@@ -26,46 +26,69 @@ int _notAttempted = 0;
 class _FillQuestionnaireState extends State<FillQuestionnaire> {
 
   DatabaseService databaseService = new DatabaseService();
-  QuerySnapshot questionSnapshot;
+  QuerySnapshot questionsSnapshot;
 
-  Question fetchQuestionFromSnapshot(DocumentSnapshot questionSnapshot){
+  QuestionModel getQuestionModelFromSnapshot(DocumentSnapshot questionSnapshot){
 
-    Question question = new Question();
+    QuestionModel questionModel = new QuestionModel();
 
-    question.intitulate = questionSnapshot.data()["question"]; //Unsure if I get the good data
+    if(questionSnapshot != null){
+      print("Snapshot exists");
+      print(questionSnapshot);
+    }
+
+    questionModel.question = questionSnapshot.data()["question"];
+    //"Hello";
+
+        //questionsSnapshot.data()[""]; //Unsure if I get the good data
 
     List<String> options =
-        [questionSnapshot.data()["option1"],
-          questionSnapshot.data()["option2"],
-          questionSnapshot.data()["option3"],
-          questionSnapshot.data()["option4"],
+        [questionSnapshot.data()["answer1"],
+          questionSnapshot.data()["answer2"],
+          questionSnapshot.data()["answer3"],
+          questionSnapshot.data()["answer4"],
 
         ];
+
+    // List<String> options =
+    // ["option1",
+    //   "option2",
+    //  "option3",
+    //   "option4",
+    // ];
 
     //shuffle the options
 
     options.shuffle();
 
-    question.option1 = options[0];
-    question.option2 = options[1];
-    question.option3 = options[2];
-    question.option3 = options[3];
-    question.goodAnswer = questionSnapshot.data()["option1"];
+    questionModel.option1 = options[0];
+    questionModel.option2 = options[1];
+    questionModel.option3 = options[2];
+    questionModel.option4 = options[3];
+    questionModel.correctOption = questionSnapshot.data()["answer1"];
+    //questionModel.correctOption = "option1";
     //in order to prevent picking each and every option one after the other to check if they are good
-    question.answered = false;
+    questionModel.answered = false;
+
+    print(questionModel.option1);
+    print(questionModel.option2);
+    print(questionModel.option3);
+    print(questionModel.option4);
+
+    return questionModel;
   }
 
 
   @override
   void initState() {
     print("This questionnaire's ID is ${widget.questionnaireId}");
-    databaseService.fetchQuestions(widget.questionnaireId).then((value){
-      questionSnapshot = value;
+    databaseService.getQuestionData(widget.questionnaireId).then((value){
+      questionsSnapshot = value;
       print("here");
       _notAttempted;
       _correct = 0;
       _incorrect = 0;
-      total = questionSnapshot.docs.length;
+      total = questionsSnapshot.docs.length;
 
 
       setState(() {
@@ -88,16 +111,16 @@ class _FillQuestionnaireState extends State<FillQuestionnaire> {
       ),
       body: Container(
         child: Column(children: [
-          questionSnapshot.docs == null ?
+          questionsSnapshot.docs == null ?
               Container()
           :
               Container(child: ListView.builder(
                 shrinkWrap: true,
                   physics: ClampingScrollPhysics(),
-                  itemCount: questionSnapshot.docs.length,
+                  itemCount: questionsSnapshot.docs.length,
                 itemBuilder: (context, index){
-                    return QuestionDisplayed(
-                      question: fetchQuestionFromSnapshot(questionSnapshot.docs[index],),
+                    return QuizPlayTile(
+                      questionModel: getQuestionModelFromSnapshot(questionsSnapshot.docs[index],),
                       index: index,//Unsure about "questionSnapshot"
                     );
                 },
@@ -109,18 +132,18 @@ class _FillQuestionnaireState extends State<FillQuestionnaire> {
   }
 }
 
-class QuestionDisplayed extends StatefulWidget {
-  final Question question;
+class QuizPlayTile extends StatefulWidget {
+  final QuestionModel questionModel;
   final int index;
   
-  QuestionDisplayed({@required this.question, @required this.index});
+  QuizPlayTile({@required this.questionModel, @required this.index});
   
   
   @override
-  _QuestionDisplayedState createState() => _QuestionDisplayedState();
+  _QuizPlayTileState createState() => _QuizPlayTileState();
 }
 
-class _QuestionDisplayedState extends State<QuestionDisplayed> {
+class _QuizPlayTileState extends State<QuizPlayTile> {
 
   String optionSelected = "";
   @override
@@ -128,32 +151,32 @@ class _QuestionDisplayedState extends State<QuestionDisplayed> {
     return Container(
       child: Column(
         children: [
-          Text(widget.question.intitulate),
+          Text(widget.questionModel.question),
           SizedBox(height: 4,),
-          PotentialAnswer(
-            goodAnswer: widget.question.option1,
-            description: widget.question.option1,
+          OptionTile(
+            goodAnswer: widget.questionModel.option1,
+            description: widget.questionModel.option1,
             label: "A",
             optionSelected: optionSelected,
           ),
           SizedBox(height: 4,),
-          PotentialAnswer(
-            goodAnswer: widget.question.option1,
-            description: widget.question.option2,
+          OptionTile(
+            goodAnswer: widget.questionModel.option1,
+            description: widget.questionModel.option2,
             label: "B",
             optionSelected: optionSelected,
           ),
           SizedBox(height: 4,),
-          PotentialAnswer(
-            goodAnswer: widget.question.option1,
-            description: widget.question.option3,
+          OptionTile(
+            goodAnswer: widget.questionModel.option1,
+            description: widget.questionModel.option3,
             label: "C",
             optionSelected: optionSelected,
           ),
           SizedBox(height: 4,),
-          PotentialAnswer(
-            goodAnswer: widget.question.option1,
-            description: widget.question.option4,
+          OptionTile(
+            goodAnswer: widget.questionModel.option1,
+            description: widget.questionModel.option4,
             label: "D",
             optionSelected: optionSelected,
           ),

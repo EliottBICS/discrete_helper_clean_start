@@ -1,17 +1,17 @@
 import 'package:discrete_helper_clean_start/widgets/BICSColors.dart';
 import 'package:flutter/material.dart';
 
-class PotentialAnswer extends StatefulWidget {
+class OptionTile extends StatefulWidget {
   final String label, description, goodAnswer, optionSelected;
 
-  PotentialAnswer({@required this.description, @required this.label, @required this.goodAnswer, @required this.optionSelected});
+  OptionTile({@required this.description, @required this.label, @required this.goodAnswer, @required this.optionSelected});
 
 
   @override
-  _PotentialAnswerState createState() => _PotentialAnswerState();
+  _OptionTileState createState() => _OptionTileState();
 }
 
-class _PotentialAnswerState extends State<PotentialAnswer> {
+class _OptionTileState extends State<OptionTile> {
   @override
   Widget build(BuildContext context) {
     return Container(

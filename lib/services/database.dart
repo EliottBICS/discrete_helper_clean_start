@@ -43,7 +43,7 @@ class DatabaseService {
     return await FirebaseFirestore.instance.collection("Questionnaire").snapshots();
   }
 
-  fetchQuestions(String questionnaireId)async{
+  getQuestionData(String questionnaireId)async{
     //This goes into the database and fetch every documents in the "Questions and Answers" collection of a specific questionnaire
     return await FirebaseFirestore.instance.collection("Questionnaire").doc(questionnaireId).collection("QnA").get();
 
