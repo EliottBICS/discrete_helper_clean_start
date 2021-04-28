@@ -45,7 +45,7 @@ class _HomeState extends State<Home> {
                 } else {
                   return ListView.builder(
                       shrinkWrap: true,
-                      physics: ClampingScrollPhysics(),
+                      physics: const AlwaysScrollableScrollPhysics(),
                       itemCount: snapshot.data.docs.length,
                       itemBuilder: (context, index) {
                         DocumentSnapshot ds = snapshot.data.docs[index];
