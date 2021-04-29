@@ -75,6 +75,8 @@ class _FillQuestionnaireState extends State<FillQuestionnaire> {
     print(questionModel.option3);
     print(questionModel.option4);
 
+    print("The good answer is ${questionModel.correctOption} ");
+
     return questionModel;
   }
 
@@ -114,7 +116,7 @@ class _FillQuestionnaireState extends State<FillQuestionnaire> {
           questionsSnapshot.docs == null ?
               Container()
           :
-              Container(child: ListView.builder(
+              ListView.builder(
                 shrinkWrap: true,
                   physics: ClampingScrollPhysics(),
                   itemCount: questionsSnapshot.docs.length,
@@ -124,7 +126,7 @@ class _FillQuestionnaireState extends State<FillQuestionnaire> {
                       index: index,//Unsure about "questionSnapshot"
                     );
                 },
-              ),)
+              )
 
         ],),
       ),
@@ -153,32 +155,161 @@ class _QuizPlayTileState extends State<QuizPlayTile> {
         children: [
           Text(widget.questionModel.question),
           SizedBox(height: 4,),
-          OptionTile(
-            goodAnswer: widget.questionModel.option1,
-            description: widget.questionModel.option1,
-            label: "A",
-            optionSelected: optionSelected,
+          GestureDetector(
+            onTap: (){
+              //checks if no answer has been input for now
+              if(!widget.questionModel.answered){
+                //good answer
+                if(widget.questionModel.correctOption == widget.questionModel.option1){
+                  optionSelected = widget.questionModel.option1;
+                  widget.questionModel.answered = true;
+                  //increase the number of correct answers
+                  _correct += 1;
+                  _notAttempted -=1;
+                  setState(() {
+
+                  });
+
+                }else{
+                  //wrong answer
+                  optionSelected = widget.questionModel.option1;
+                  widget.questionModel.answered = true;
+                  //increase number of incorrect answers
+                  _incorrect += 1;
+                  _notAttempted -= 1;
+
+                  setState(() {
+                    //updates the data visible
+                  });
+
+                }
+              }
+            },
+            child: SuggestionTile(
+              goodAnswer: widget.questionModel.option1,
+              description: widget.questionModel.option1,
+              label: "A",
+              optionSelected: optionSelected,
+            ),
           ),
           SizedBox(height: 4,),
-          OptionTile(
-            goodAnswer: widget.questionModel.option1,
-            description: widget.questionModel.option2,
-            label: "B",
-            optionSelected: optionSelected,
+          GestureDetector(
+            onTap: (){
+              // print("hello");
+              // print("I'm here");
+              //checks if no answer has been input for now
+              if(!widget.questionModel.answered){
+                //good answer
+                if(widget.questionModel.correctOption == widget.questionModel.option2){
+                  optionSelected = widget.questionModel.option2;
+                  widget.questionModel.answered = true;
+                  //increase the number of correct answers
+                  print("Good answer");
+                  _correct += 1;
+                  _notAttempted -=1;
+                  setState(() {
+
+                  });
+
+                }else{
+                  //wrong answer
+                  optionSelected = widget.questionModel.option2;
+                  widget.questionModel.answered = true;
+                  //increase number of incorrect answers
+                  _incorrect += 1;
+                  _notAttempted -= 1;
+
+                  setState(() {
+                    //updates the data visible
+                  });
+
+                }
+              }
+            },
+            child: SuggestionTile(
+              goodAnswer: widget.questionModel.option1,
+              description: widget.questionModel.option2,
+              label: "B",
+              optionSelected: optionSelected,
+            ),
           ),
           SizedBox(height: 4,),
-          OptionTile(
-            goodAnswer: widget.questionModel.option1,
-            description: widget.questionModel.option3,
-            label: "C",
-            optionSelected: optionSelected,
+          GestureDetector(
+            onTap: (){
+              //checks if no answer has been input for now
+              if(!widget.questionModel.answered){
+                //good answer
+                if(widget.questionModel.correctOption == widget.questionModel.option3){
+                  print("Good answer");
+                  optionSelected = widget.questionModel.option3;
+                  widget.questionModel.answered = true;
+                  //increase the number of correct answers
+                  _correct += 1;
+                  _notAttempted -=1;
+                  setState(() {
+
+                  });
+
+                }else{
+                  //wrong answer
+                  optionSelected = widget.questionModel.option3;
+                  widget.questionModel.answered = true;
+                  //increase number of incorrect answers
+                  _incorrect += 1;
+                  _notAttempted -= 1;
+
+                  setState(() {
+                    //updates the data visible
+                  });
+
+                }
+              }
+            },
+            child: SuggestionTile(
+              goodAnswer: widget.questionModel.option1,
+              description: widget.questionModel.option3,
+              label: "C",
+              optionSelected: optionSelected,
+            ),
           ),
           SizedBox(height: 4,),
-          OptionTile(
-            goodAnswer: widget.questionModel.option1,
-            description: widget.questionModel.option4,
-            label: "D",
-            optionSelected: optionSelected,
+          GestureDetector(
+            onTap: (){
+              //checks if no answer has been input for now
+              if(!widget.questionModel.answered){
+                //good answer
+                if(widget.questionModel.correctOption == widget.questionModel.option4){
+                  print("Good answer");
+                  optionSelected = widget.questionModel.option4;
+                  widget.questionModel.answered = true;
+                  //increase the number of correct answers
+                  _correct += 1;
+                  _notAttempted -=1;
+                  setState(() {
+
+                  });
+
+                }else{
+                  //wrong answer
+                  optionSelected = widget.questionModel.option4;
+                  widget.questionModel.answered = true;
+                  //increase number of incorrect answers
+                  _incorrect += 1;
+                  _notAttempted -= 1;
+
+                  setState(() {
+                    //updates the data visible
+                  });
+
+                }
+              }
+            },
+            child: SuggestionTile(
+              goodAnswer: widget.questionModel.option1,
+              description: widget.questionModel.option4,
+              label: "D",
+              optionSelected: optionSelected,
+            ),
           ),
         ],
       ),

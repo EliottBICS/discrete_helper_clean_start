@@ -1,38 +1,40 @@
 import 'package:discrete_helper_clean_start/widgets/BICSColors.dart';
 import 'package:flutter/material.dart';
 
-class OptionTile extends StatefulWidget {
+class SuggestionTile extends StatefulWidget {
   final String label, description, goodAnswer, optionSelected;
 
-  OptionTile({@required this.description, @required this.label, @required this.goodAnswer, @required this.optionSelected});
+  SuggestionTile({@required this.description, @required this.label, @required this.goodAnswer, @required this.optionSelected});
 
 
   @override
-  _OptionTileState createState() => _OptionTileState();
+  _SuggestionTileState createState() => _SuggestionTileState();
 }
 
-class _OptionTileState extends State<OptionTile> {
+class _SuggestionTileState extends State<SuggestionTile> {
   @override
   Widget build(BuildContext context) {
     return Container(
+      padding: EdgeInsets.symmetric(horizontal: 20, vertical: 10),
       child: Row(
         children: [
           Container(
             decoration: BoxDecoration(
               border: Border.all(
-                color: widget.description == widget.optionSelected ? //If an answer is picked, change color
-                widget.optionSelected == widget.goodAnswer ? BICSGreen().withOpacity(0.7) //If the answer picked is the good one, turn to green
-                : BICSRed().withOpacity(0.7) //If it's wrong, it turns to red
-                : BICSGrey().withOpacity(0.7) //If no answer is picked, stay grey
+                color: widget.optionSelected == widget.description ? //If an answer is picked, change color
+                widget.description == widget.goodAnswer ? Colors.green.withOpacity(0.7) //If the answer picked is the good one, turn to green
+                : Colors.red.withOpacity(0.7) //If it's wrong, it turns to red
+                : Colors.grey.withOpacity(0.7) //If no answer is picked, stay grey
               )
 
             ),
-            child: Text("${widget.label}", style: TextStyle(
-              color: widget.optionSelected == widget.description ? widget.optionSelected == widget.goodAnswer ?
-                  BICSGreen().withOpacity(0.7) //Right answer makes the text green
-              : BICSRed().withOpacity(0.7) //Wrong answer makes it red
-              : BICSGrey().withOpacity(0.7) //No answer makes it grey
-            ),),
+            child: Text(widget.label,
+              style: TextStyle(
+              color: widget.optionSelected == widget.description?
+                  Colors.green :
+                  Colors.red,
+            ),
+            ),
           ),
           SizedBox(width: 8,),
 
