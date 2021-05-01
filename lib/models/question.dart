@@ -4,6 +4,6 @@ class QuestionModel{
   String option2;
   String option3;
   String option4;
-  String correctOption;
+  String rightOption;
   bool answered;
 }

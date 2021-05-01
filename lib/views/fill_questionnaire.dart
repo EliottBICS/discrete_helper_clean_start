@@ -65,7 +65,7 @@ class _FillQuestionnaireState extends State<FillQuestionnaire> {
     questionModel.option2 = options[1];
     questionModel.option3 = options[2];
     questionModel.option4 = options[3];
-    questionModel.correctOption = questionSnapshot.data()["answer1"];
+    questionModel.rightOption = questionSnapshot.data()["answer1"];
     //questionModel.correctOption = "option1";
     //in order to prevent picking each and every option one after the other to check if they are good
     questionModel.answered = false;
@@ -75,7 +75,7 @@ class _FillQuestionnaireState extends State<FillQuestionnaire> {
     print(questionModel.option3);
     print(questionModel.option4);
 
-    print("The good answer is ${questionModel.correctOption} ");
+    print("The good answer is ${questionModel.rightOption} ");
 
     return questionModel;
   }
@@ -114,9 +114,15 @@ class _FillQuestionnaireState extends State<FillQuestionnaire> {
       body: Container(
         child: Column(children: [
           questionsSnapshot.docs == null ?
-              Container()
+              //If the snapshot is not loaded
+              Container(
+                child: Center(
+                  child: CircularProgressIndicator(),
+                ),
+              )
           :
               ListView.builder(
+                padding: EdgeInsets.symmetric(horizontal: 24),
                 shrinkWrap: true,
                   physics: ClampingScrollPhysics(),
                   itemCount: questionsSnapshot.docs.length,
@@ -152,15 +158,16 @@ class _QuizPlayTileState extends State<QuizPlayTile> {
   Widget build(BuildContext context) {
     return Container(
       child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Text(widget.questionModel.question),
+          Text(widget.questionModel.question, style: TextStyle(fontSize: 20, color: Colors.black87),),
           SizedBox(height: 4,),
           GestureDetector(
             onTap: (){
               //checks if no answer has been input for now
               if(!widget.questionModel.answered){
                 //good answer
-                if(widget.questionModel.correctOption == widget.questionModel.option1){
+                if(widget.questionModel.rightOption == widget.questionModel.option1){
                   optionSelected = widget.questionModel.option1;
                   widget.questionModel.answered = true;
                   //increase the number of correct answers
@@ -186,7 +193,7 @@ class _QuizPlayTileState extends State<QuizPlayTile> {
               }
             },
             child: SuggestionTile(
-              goodAnswer: widget.questionModel.option1,
+              goodAnswer: widget.questionModel.rightOption,
               description: widget.questionModel.option1,
               label: "A",
               optionSelected: optionSelected,
@@ -200,7 +207,7 @@ class _QuizPlayTileState extends State<QuizPlayTile> {
               //checks if no answer has been input for now
               if(!widget.questionModel.answered){
                 //good answer
-                if(widget.questionModel.correctOption == widget.questionModel.option2){
+                if(widget.questionModel.rightOption == widget.questionModel.option2){
                   optionSelected = widget.questionModel.option2;
                   widget.questionModel.answered = true;
                   //increase the number of correct answers
@@ -227,7 +234,7 @@ class _QuizPlayTileState extends State<QuizPlayTile> {
               }
             },
             child: SuggestionTile(
-              goodAnswer: widget.questionModel.option1,
+              goodAnswer: widget.questionModel.rightOption,
               description: widget.questionModel.option2,
               label: "B",
               optionSelected: optionSelected,
@@ -239,7 +246,7 @@ class _QuizPlayTileState extends State<QuizPlayTile> {
               //checks if no answer has been input for now
               if(!widget.questionModel.answered){
                 //good answer
-                if(widget.questionModel.correctOption == widget.questionModel.option3){
+                if(widget.questionModel.rightOption == widget.questionModel.option3){
                   print("Good answer");
                   optionSelected = widget.questionModel.option3;
                   widget.questionModel.answered = true;
@@ -266,7 +273,7 @@ class _QuizPlayTileState extends State<QuizPlayTile> {
               }
             },
             child: SuggestionTile(
-              goodAnswer: widget.questionModel.option1,
+              goodAnswer: widget.questionModel.rightOption,
               description: widget.questionModel.option3,
               label: "C",
               optionSelected: optionSelected,
@@ -278,7 +285,7 @@ class _QuizPlayTileState extends State<QuizPlayTile> {
               //checks if no answer has been input for now
               if(!widget.questionModel.answered){
                 //good answer
-                if(widget.questionModel.correctOption == widget.questionModel.option4){
+                if(widget.questionModel.rightOption == widget.questionModel.option4){
                   print("Good answer");
                   optionSelected = widget.questionModel.option4;
                   widget.questionModel.answered = true;
@@ -305,7 +312,7 @@ class _QuizPlayTileState extends State<QuizPlayTile> {
               }
             },
             child: SuggestionTile(
-              goodAnswer: widget.questionModel.option1,
+              goodAnswer: widget.questionModel.rightOption,
               description: widget.questionModel.option4,
               label: "D",
               optionSelected: optionSelected,
