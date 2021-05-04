@@ -3,9 +3,11 @@ import 'package:discrete_helper_clean_start/services/auth.dart';
 import 'package:discrete_helper_clean_start/views/home.dart';
 import 'package:discrete_helper_clean_start/views/signup.dart';
 import 'package:discrete_helper_clean_start/widgets/widgets.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:discrete_helper_clean_start/widgets/BICSColors.dart';
 import 'package:discrete_helper_clean_start/models/student.dart';
+import 'package:discrete_helper_clean_start/preferences/functions.dart';
 
 class SignIn extends StatefulWidget {
   @override
@@ -13,6 +15,7 @@ class SignIn extends StatefulWidget {
 }
 
 class _SignInState extends State<SignIn> {
+  final FirebaseAuth auth = FirebaseAuth.instance; //get user id
   final _formKey = GlobalKey<FormState>();
   String email, password;
   AuthService authService = new AuthService();
@@ -24,6 +27,10 @@ class _SignInState extends State<SignIn> {
       setState(() {
         _isLoading = true;
       });
+      final User user = auth.currentUser; //This is the user
+      final uid = user.uid; //This is the user's key
+      print("The key is ${uid}");
+      print("The user is ${user}");
       await authService.signInEmailPassword(email, password).then((val) {
         if (val != null) {
           setState(() {

@@ -22,4 +22,10 @@ class preferenceFunctions{
     return prefs.getBool(UserLoggedInID);
   }
 
+  static Future<String> getUserID() async{
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    print(UserLoggedInID);
+    return UserLoggedInID;
+  }
+
 }

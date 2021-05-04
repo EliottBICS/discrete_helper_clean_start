@@ -21,6 +21,21 @@ class DatabaseService {
     });
   }
 
+  //function used to create a user in the database
+
+  Future<void> addUser(
+      Map userData,
+      String userID,
+      ) async {
+    await FirebaseFirestore.instance
+        .collection("Users")
+        .doc(userID)
+        .set(userData)
+        .catchError((e){
+          print(e.toString());
+    });
+  }
+
   //function used to add a question to the database
 
   Future<void> addQuestionData(Map questionData, String questionnaireId) async {

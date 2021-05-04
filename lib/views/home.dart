@@ -9,6 +9,7 @@ import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:discrete_helper_clean_start/main.dart';
+import 'package:discrete_helper_clean_start/preferences/functions.dart';
 
 //The homescreen. Users that are properly identified end up here
 //You can access questionnaires from here
@@ -88,6 +89,13 @@ class _HomeState extends State<Home> {
       appBar: AppBar(
         title: discreteHelperAppBar(context),
         brightness: Brightness.dark,
+        actions: [
+          IconButton(icon: Icon(Icons.exit_to_app), onPressed: (){
+            Navigator.pushReplacement(context,
+                MaterialPageRoute(builder: (context) => SignIn()));
+            preferenceFunctions.forgetUser();
+          })
+        ],
       ),
       body: Column(children: [
         Container(child: questionnairesColumn()),
@@ -100,9 +108,8 @@ class _HomeState extends State<Home> {
               // Spacer(),
               GestureDetector(
                   onTap: () {
-                    Navigator.pushReplacement(context,
-                        MaterialPageRoute(builder: (context) => SignIn()));
-                    preferenceFunctions.forgetUser();
+
+
                   },
                   child: Center(child: bicsRedButton(context, "sign out"))),
               SizedBox(height: 10)

@@ -1,10 +1,13 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:discrete_helper_clean_start/models/question.dart';
 import 'package:discrete_helper_clean_start/services/database.dart';
+import 'package:discrete_helper_clean_start/views/results.dart';
 import 'package:discrete_helper_clean_start/widgets/fill_questionnaire_widgets.dart';
 import 'package:discrete_helper_clean_start/widgets/widgets.dart';
+import 'signin.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:discrete_helper_clean_start/preferences/functions.dart';
 
 class FillQuestionnaire extends StatefulWidget {
 
@@ -27,6 +30,7 @@ class _FillQuestionnaireState extends State<FillQuestionnaire> {
 
   DatabaseService databaseService = new DatabaseService();
   QuerySnapshot questionsSnapshot;
+
 
   QuestionModel getQuestionModelFromSnapshot(DocumentSnapshot questionSnapshot){
 
@@ -110,6 +114,13 @@ class _FillQuestionnaireState extends State<FillQuestionnaire> {
       appBar: AppBar(
         title: discreteHelperAppBar(context),
         brightness: Brightness.dark,
+        actions: [
+          IconButton(icon: Icon(Icons.exit_to_app), onPressed: (){
+            Navigator.pushReplacement(context,
+                MaterialPageRoute(builder: (context) => SignIn()));
+            preferenceFunctions.forgetUser();
+          })
+        ],
       ),
       body: Container(
         child: Column(children: [
@@ -136,6 +147,17 @@ class _FillQuestionnaireState extends State<FillQuestionnaire> {
 
         ],),
       ),
+      
+      floatingActionButton: FloatingActionButton(
+        child: Icon(Icons.check),
+        onPressed: (){
+          Navigator.pushReplacement(context, MaterialPageRoute(
+              builder: (context) => Results(
+                correct: _correct, incorrect: _incorrect, total: total, perfect: false,
+              )
+          ));
+        },
+      ),
     );
   }
 }
@@ -160,7 +182,7 @@ class _QuizPlayTileState extends State<QuizPlayTile> {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Text(widget.questionModel.question, style: TextStyle(fontSize: 20, color: Colors.black87),),
+          Text("Question ${widget.index+1}: ${widget.questionModel.question}", style: TextStyle(fontSize: 20, color: Colors.black87),),
           SizedBox(height: 4,),
           GestureDetector(
             onTap: (){
