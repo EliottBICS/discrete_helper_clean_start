@@ -2,6 +2,7 @@ import 'package:discrete_helper_clean_start/preferences/functions.dart';
 import 'package:discrete_helper_clean_start/services/database.dart';
 import 'package:discrete_helper_clean_start/views/create_questionnaire.dart';
 import 'package:discrete_helper_clean_start/views/fill_questionnaire.dart';
+import 'package:discrete_helper_clean_start/views/score.dart';
 import 'package:discrete_helper_clean_start/views/signin.dart';
 import 'package:discrete_helper_clean_start/widgets/BICSColors.dart';
 import 'package:discrete_helper_clean_start/widgets/widgets.dart';
@@ -83,6 +84,8 @@ class _HomeState extends State<Home> {
   }
 
   @override
+
+  String uid = "s2IOfTBKmCQzyqV27QTOMzRHWOy2"; //I want this to be dynamic later
   Widget build(BuildContext context) {
     return Scaffold(
       //backgroundColor: BICSBlueAccent(), //For testing purposes
@@ -94,6 +97,10 @@ class _HomeState extends State<Home> {
             Navigator.pushReplacement(context,
                 MaterialPageRoute(builder: (context) => SignIn()));
             preferenceFunctions.forgetUser();
+          }),
+          IconButton(icon: Icon(Icons.score), onPressed: (){
+            Navigator.push(context,
+            MaterialPageRoute(builder: (context) => ScoreScreen(uid)));
           })
         ],
       ),

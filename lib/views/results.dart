@@ -1,7 +1,9 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:discrete_helper_clean_start/widgets/widgets.dart';
 import 'package:flutter/material.dart';
 import 'package:discrete_helper_clean_start/preferences/functions.dart';
 import 'signin.dart';
+import 'package:discrete_helper_clean_start/services/database.dart';
 
 class Results extends StatefulWidget {
   final int correct, incorrect, total;
@@ -13,8 +15,29 @@ class Results extends StatefulWidget {
   _ResultsState createState() => _ResultsState();
 }
 
+
+
 class _ResultsState extends State<Results> {
+
+  DatabaseService databaseService = new DatabaseService();
+  QuerySnapshot userSnapshot;
+
+  List getScoresFromSnapshot(DocumentSnapshot userSnapshot){
+
+    //Returns FillerScore, MakerScore
+
+    if(userSnapshot != null){
+      print("user exists");
+      print(userSnapshot);
+    }
+
+
+
+
+  }
+
   @override
+
   Widget build(BuildContext context) {
     widget.score = 0;
     widget.perfect = false;

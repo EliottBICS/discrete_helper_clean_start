@@ -24,17 +24,18 @@ class DatabaseService {
   //function used to create a user in the database
 
   Future<void> addUser(
-      Map userData,
-      String userID,
-      ) async {
+    Map userData,
+    String userID,
+  ) async {
     await FirebaseFirestore.instance
         .collection("Users")
         .doc(userID)
         .set(userData)
-        .catchError((e){
-          print(e.toString());
+        .catchError((e) {
+      print(e.toString());
     });
   }
+
 
   //function used to add a question to the database
 
@@ -52,15 +53,33 @@ class DatabaseService {
     });
   }
 
+  fetchUsers() async {
+    return await FirebaseFirestore.instance.collection("Users").snapshots();
+    //this function queries the current state of the collection "Users"
+  }
+
+  getUserData(String userID) async {
+    //This returns keys and values of the data stored for each user
+    return await FirebaseFirestore.instance
+        .collection("Users")
+        .doc(userID)
+        .get();
+  }
+
   fetchQuestionnaires() async {
     //this function querries the content of the Questionnaire collection
     //A snapshot is a state of the collection at some point in time
-    return await FirebaseFirestore.instance.collection("Questionnaire").snapshots();
+    return await FirebaseFirestore.instance
+        .collection("Questionnaire")
+        .snapshots();
   }
 
-  getQuestionData(String questionnaireId)async{
+  getQuestionData(String questionnaireId) async {
     //This goes into the database and fetch every documents in the "Questions and Answers" collection of a specific questionnaire
-    return await FirebaseFirestore.instance.collection("Questionnaire").doc(questionnaireId).collection("QnA").get();
-
+    return await FirebaseFirestore.instance
+        .collection("Questionnaire")
+        .doc(questionnaireId)
+        .collection("QnA")
+        .get();
   }
 }

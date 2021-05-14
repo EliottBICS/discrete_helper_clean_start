@@ -5,8 +5,8 @@ import 'package:discrete_helper_clean_start/models/student.dart';
 class AuthService {
   final FirebaseAuth _auth = FirebaseAuth.instance;
 
-  Student _userFromFirebaseUser(User user) {
-    return user != null ? Student(uid: user.uid) : null;
+  StudentModel _userFromFirebaseUser(User user) {
+    return user != null ? StudentModel() : null;
   }
 
   Future signInEmailPassword(String email, String password) async {

@@ -1,4 +1,6 @@
-class Student {
+class StudentModel {
   String uid;
-  Student({this.uid});
+  String name;
+  int fillerScore;
+  int makerScore;
 }
