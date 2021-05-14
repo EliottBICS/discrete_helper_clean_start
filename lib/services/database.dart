@@ -23,14 +23,18 @@ class DatabaseService {
 
   //function used to create a user in the database
 
-  Future<void> addUser(
+  Future<void> addUser( //Currently it gives an ID to the scoreList, which we do not use.
+      //Nonetheless, if we want to add some other data to the users that is not related to its score, it
+      //is possible with this database architecture
     Map userData,
     String userID,
   ) async {
     await FirebaseFirestore.instance
         .collection("Users")
         .doc(userID)
-        .set(userData)
+        .collection("Scores")
+        .add(userData)
+        // .set(userData)
         .catchError((e) {
       print(e.toString());
     });
@@ -63,6 +67,7 @@ class DatabaseService {
     return await FirebaseFirestore.instance
         .collection("Users")
         .doc(userID)
+        .collection("Scores")
         .get();
   }
 
@@ -83,3 +88,4 @@ class DatabaseService {
         .get();
   }
 }
+

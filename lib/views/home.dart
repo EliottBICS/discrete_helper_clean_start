@@ -100,7 +100,7 @@ class _HomeState extends State<Home> {
           }),
           IconButton(icon: Icon(Icons.score), onPressed: (){
             Navigator.push(context,
-            MaterialPageRoute(builder: (context) => ScoreScreen(uid)));
+            MaterialPageRoute(builder: (context) => ScoreScreen()));
           })
         ],
       ),
